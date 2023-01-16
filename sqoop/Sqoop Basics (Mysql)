@@ -1,0 +1,16 @@
+mysql -u root -p
+create database exmprep;
+create table student(roll_no int primary key, stud_name varchar(30), stud_mark int);
+desc student;
+select * from student;
+in new terminal:-
+sqoop import --connect jdbc:mysql://localhost/exmprep --table student -m 1 --target-dir '/myimport123/';
+
+################################################################################
+
+create table car(id int, maker varchar(20),model varchar(20), year int);
+load data local infile '/media/sf_MyWork/cars.txt' into table car fields terminated by ',';
+
+in new terminal:-
+sqoop import --connect jdbc:mysql://localhost/exmprep --table car -m 1 --target-dir '/myimport222/';
+hdfs dfs -cat '/myimport222/part-m-00000'
